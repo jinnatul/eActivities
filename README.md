@@ -1,5 +1,7 @@
 # eActivities
 
+
+## Branch: API 
 ### Create project solution File (eActivities.sln)
 - dotnet new sln
 
@@ -28,4 +30,13 @@ Project(s)
 - /eActivities/API$ dotnet add reference ../Application/
 - /eActivities/Persistence$ dotnet add reference ../Domain/
 ![References](https://user-images.githubusercontent.com/31995155/71798572-e8eac780-307c-11ea-869e-1f1007db5184.png)
+
+
+## Branch: Client
+### Create React Client side application
+- npx create-react-app client-app --template typescript
+
+### Install Dependency
+- npm add semantic-ui-react
+- npm i axios
 
