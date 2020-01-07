@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 
 class App extends Component {
   state = {
@@ -8,8 +9,12 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.setState({
-      values: [{id: 1, name: "Morol"}, {id: 2, name: "Farhana"}]
+    axios.get('http://localhost:5000/values')
+    .then((response) => {
+      console.log(response);
+      this.setState({
+        values: response.data
+      })
     })
   }
 
