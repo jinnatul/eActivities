@@ -25,6 +25,3 @@ bld/
 msbuild.log
 msbuild.err
 msbuild.wrn
-
-# Node modules
-node_modules/
