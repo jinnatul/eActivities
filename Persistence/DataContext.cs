@@ -17,7 +17,7 @@ namespace Persistence
         {
             builder.Entity<Value>()
             .HasData(
-                new Value {Id = 1, Name = "Zinnat"},
+                new Value {Id = 1, Name = "Morol"},
                 new Value {Id = 2, Name = "Farhana"}
             );
         }
