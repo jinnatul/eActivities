@@ -40,3 +40,11 @@ Project(s)
 - npm add semantic-ui-react
 - npm i axios
 
+
+## Branch: Crud_react_core
+### Activities
+- Adding activity entity
+- Add nugetPack(mediatr.extensions.microsoft.dependencyinjection)
+- Create activity API controller
+- Adding Details,Create,Edit,Delete Handler
+- Dealing with boilerplate code in our Handlers
