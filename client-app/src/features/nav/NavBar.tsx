@@ -6,7 +6,7 @@ export const NavBar = () => {
       <Menu fixed='top' inverted>
         <Container>
             <Menu.Item header>
-                <img src='/items/logo.png' alt='logo' />
+                <img src='/items/logo.png' alt='logo' style={{marginRight: '10px'}}/>
                 eActivities
             </Menu.Item>
             <Menu.Item name='Activities'/>
