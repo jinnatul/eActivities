@@ -42,9 +42,33 @@ Project(s)
 
 
 ## Branch: Crud_react_core
-### Activities
+### Part-1 (API dotnet core)
 - Adding activity entity
 - Add nugetPack(mediatr.extensions.microsoft.dependencyinjection)
 - Create activity API controller
 - Adding Details,Create,Edit,Delete Handler
 - Dealing with boilerplate code in our Handlers
+
+![1](https://user-images.githubusercontent.com/31995155/72104264-40c35000-3355-11ea-8503-dbc44731139a.png)
+![2](https://user-images.githubusercontent.com/31995155/72104267-415be680-3355-11ea-914f-5e0a8d590db2.png)
+![3](https://user-images.githubusercontent.com/31995155/72104269-428d1380-3355-11ea-8a6d-51867e19ddea.png)
+
+### Part-2 (React)
+- Folder structure (React)
+- Getting list activities from API
+- Adding activity Interface in TS
+- Adding Navigation Bar (navbar)
+- Styling react components
+- Adding activity dashboard
+- Creating an activity list
+- Adding the activity Details component
+- Adding the activity Form component
+- Selecting an Individual activity
+- Adding Edit Mode
+- Handling form Submission
+- Adding Create activity
+- Adding Delete functionality
+
+  ### Install Dependency
+   - npm install uuid
+   - npm install @types/uuid
