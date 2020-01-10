@@ -30,9 +30,11 @@ const App = () => {
   }
 
   const handleEditActivity = (activity: IActivity) => {
-    setActivities([...activities.filter(a => a.id !== activity.id), activity])
-    setSelectedActivity(activity);
-    setEditMode(false);
+    agent.Activities.update(activity).then(() => {
+      setActivities([...activities.filter(a => a.id !== activity.id), activity])
+      setSelectedActivity(activity);
+      setEditMode(false);
+    })
   }
 
   const handleDeleteActivity = (id: string) => {
