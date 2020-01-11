@@ -1,9 +1,10 @@
 import React, { SyntheticEvent } from 'react'
 import { Grid } from 'semantic-ui-react'
 import { IActivity } from '../../../app/model/activity'
-import { ActivityList } from './ActivityList'
+import  ActivityList  from './ActivityList'
 import { ActivityDetails } from '../details/ActivityDetails'
 import { ActivityForm } from '../form/ActivityForm'
+import { observer } from 'mobx-react-lite'
 
 interface IProps {
     activities: IActivity[];
@@ -19,7 +20,7 @@ interface IProps {
     target: string; 
 }
 
-export const ActivityDashboard: React.FC<IProps> = ({
+const ActivityDashboard: React.FC<IProps> = ({
     activities, 
     selectActivity, 
     selectedActivity,
@@ -65,3 +66,5 @@ export const ActivityDashboard: React.FC<IProps> = ({
         </Grid>
     );
 }
+
+export default observer(ActivityDashboard)

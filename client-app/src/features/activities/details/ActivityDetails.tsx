@@ -1,6 +1,8 @@
 import React from 'react'
 import { Card, Image, Button } from 'semantic-ui-react'
 import { IActivity } from '../../../app/model/activity'
+import { observer } from 'mobx-react-lite';
+
 
 interface IProps {
     activity: IActivity;
@@ -40,3 +42,5 @@ export const ActivityDetails: React.FC<IProps> = ({activity, setEditMode, setSel
         </Card>
     )
 }
+
+export default observer(ActivityDetails)
