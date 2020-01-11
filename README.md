@@ -72,3 +72,19 @@ Project(s)
   ### Install Dependency
    - npm install uuid
    - npm install @types/uuid
+   
+   
+## Branch: Reactstructure
+- Update API route: Route("api/[controller]")
+- Create an agent.ts (Axios support)
+- Adding delay our API(activities) method
+- Adding Loading component
+- Adding loading indicator for submission or delete Data
+- Setting Up a Mobx Store (activityStore.ts)
+- Adding async and await in our method
+- Refactoring activity List
+- Refactoring (Create, Delete, Edit) method
+- Enabling Mobx strict mode
+
+ ### Install Dependency
+  - npm install mobx mobx-react-lite
