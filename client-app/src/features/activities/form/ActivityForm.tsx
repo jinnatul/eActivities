@@ -19,22 +19,10 @@ const ActivityForm: React.FC<RouteComponentProps<DetailsParams>> = ({
         createActivity, 
         editActivity, 
         submitting, 
-        cancelOpenForm, 
         activity: initialeFormState,
         loadActivity,
         cleanActivity
     } = activityStore;
-
-    useEffect(() => {
-        if(match.params.id && activity.id.length === 0) {
-            loadActivity(match.params.id).then(
-                () => initialeFormState && setActivity(initialeFormState)
-            );
-        }
-        return (() => {
-            cleanActivity()
-        })
-    }, [loadActivity, match.params.id, cleanActivity, initialeFormState,]); 
 
     const [activity, setActivity] = useState<IActivity>({
         id: '',
@@ -45,6 +33,17 @@ const ActivityForm: React.FC<RouteComponentProps<DetailsParams>> = ({
         city: '',
         venue: ''
     });
+    
+    useEffect(() => {
+        if(match.params.id && activity.id.length === 0) {
+            loadActivity(match.params.id).then(
+                () => initialeFormState && setActivity(initialeFormState)
+            );
+        }
+        return (() => {
+            cleanActivity()
+        })
+    }, [loadActivity, match.params.id, cleanActivity, initialeFormState, activity.id.length]); 
     
     const handleSubmit = () => {
         if(activity.id.length === 0) {
@@ -107,7 +106,7 @@ const ActivityForm: React.FC<RouteComponentProps<DetailsParams>> = ({
                 />
                 <Button loading={submitting} floated='right' positive type='submit' content='Submit' />
                 <Button 
-                    onClick={cancelOpenForm} 
+                    onClick={() => history.push('/activities')} 
                     floated='right' 
                     type='button' 
                     content='Cancel' 
