@@ -5,12 +5,12 @@ import ActivityDashboard  from '../../features/activities/dashboard/ActivityDash
 import { LoadingComponent } from './LoadingComponent';
 import ActivityStore from '../../app/stores/activityStore';
 import { observer } from 'mobx-react-lite';
-import { Route } from 'react-router-dom';
+import { Route, withRouter, RouteComponentProps } from 'react-router-dom';
 import HomePage from '../../features/home/HomePage';
 import ActivityForm from '../../features/activities/form/ActivityForm';
 import  ActivityDetails  from '../../features/activities/details/ActivityDetails';
 
-const App = () => {
+const App: React.FC<RouteComponentProps> = ({location}) => {
   
   const activityStore = useContext(ActivityStore);
 
@@ -27,11 +27,15 @@ const App = () => {
         <Route exact path='/' component={HomePage}/>
         <Route exact path='/activities' component={ActivityDashboard}/>
         <Route path='/activities/:id' component={ActivityDetails}/>
-        <Route path={['/createActivity', '/manage/:id']} component={ActivityForm}/>
+        <Route 
+          key={location.key} 
+          path={['/createActivity', '/manage/:id']} 
+          component={ActivityForm}
+        />
       </Container>
     </Fragment>
   );
   
 }
 
-export default observer(App);
+export default withRouter(observer(App));
