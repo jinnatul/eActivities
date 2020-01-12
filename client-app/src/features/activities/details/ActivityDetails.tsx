@@ -6,7 +6,7 @@ import ActivityStore from '../../../app/stores/activityStore';
 export const ActivityDetails: React.FC = () => {
     
     const activityStore = useContext(ActivityStore);
-    const {selectedActivity: activity, openEditForm, cancelSelectedActivity} = activityStore;
+    const {activity, openEditForm, cancelSelectedActivity} = activityStore;
     return (
         <Card fluid>
             <Image src={`/items/categoryImages/${activity!.category}.jpg`} wrapped ui={false} />
