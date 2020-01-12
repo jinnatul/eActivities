@@ -1,7 +1,9 @@
 # eActivities
 
 
+
 ## Branch: API 
+
 ### Create project solution File (eActivities.sln)
 - dotnet new sln
 
@@ -32,7 +34,9 @@ Project(s)
 ![References](https://user-images.githubusercontent.com/31995155/71798572-e8eac780-307c-11ea-869e-1f1007db5184.png)
 
 
+
 ## Branch: Client
+
 ### Create React Client side application
 - npx create-react-app client-app --template typescript
 
@@ -86,5 +90,24 @@ Project(s)
 - Refactoring (Create, Delete, Edit) method
 - Enabling Mobx strict mode
 
- ### Install Dependency
-  - npm install mobx mobx-react-lite
+  ### Install Dependency
+   - npm install mobx mobx-react-lite
+
+
+
+## Branch: React route
+- Setting up React Router
+- Adding NavLinks
+- Getting activity from API
+- Moving Home Page outside
+- Scrolling to the top of the page
+- Styling the activity list
+- Styling activity details page (Header, Info, Chat, Sidebar)
+- Styling activity Form
+- Styling Home Page
+
+  ### Install Dependency
+   - npm install react-router-dom
+   - npm install @types/react-router-dom
+
+
