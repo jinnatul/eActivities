@@ -9,7 +9,10 @@ interface DetailsParams {
     id: string
 }
 
-export const ActivityDetails: React.FC<RouteComponentProps<DetailsParams>> = ({match}) => {
+export const ActivityDetails: React.FC<RouteComponentProps<DetailsParams>> = ({
+    match,
+    history
+}) => {
     
     const activityStore = useContext(ActivityStore);
     const {
@@ -47,7 +50,7 @@ export const ActivityDetails: React.FC<RouteComponentProps<DetailsParams>> = ({m
                     content='Edit'
                 />
                 <Button 
-                    onClick={cancelSelectedActivity} 
+                    onClick={() => history.push('/activities')} 
                     basic 
                     color='grey'
                     content='Cancel' 
