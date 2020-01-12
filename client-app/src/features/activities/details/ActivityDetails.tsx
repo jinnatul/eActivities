@@ -2,12 +2,12 @@ import React, { useContext, useEffect } from 'react'
 import { Grid } from 'semantic-ui-react'
 import { observer } from 'mobx-react-lite';
 import ActivityStore from '../../../app/stores/activityStore';
-import { RouteComponentProps, Link } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 import { LoadingComponent } from '../../../app/layout/LoadingComponent';
-import { ActivityDetailedHeader } from './ActivityDetailedHeader';
-import { ActivityDetailedsInfo } from './ActivityDetailedsInfo';
-import { ActivityDetailedChat } from './ActivityDetailedChat';
-import { ActivityDetailedSidebar } from './ActivityDetailedSidebar';
+import  ActivityDetailedHeader  from './ActivityDetailedHeader';
+import  ActivityDetailedsInfo  from './ActivityDetailedsInfo';
+import  ActivityDetailedChat  from './ActivityDetailedChat';
+import  ActivityDetailedSidebar  from './ActivityDetailedSidebar';
 
 interface DetailsParams {
     id: string
@@ -31,7 +31,7 @@ const ActivityDetails: React.FC<RouteComponentProps<DetailsParams>> = ({match}) 
     return (
         <Grid>
             <Grid.Column width={10}>
-                <ActivityDetailedHeader />
+                <ActivityDetailedHeader activity={activity}/>
                 <ActivityDetailedsInfo />
                 <ActivityDetailedChat />
             </Grid.Column>
