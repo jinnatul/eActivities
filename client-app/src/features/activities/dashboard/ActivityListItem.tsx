@@ -7,7 +7,7 @@ import { IActivity } from '../../../app/model/activity';
 const ActivityListItem: React.FC<{activity: IActivity}> = ({activity}) => {
 
     const activityStore = useContext(ActivityStore);
-    const {activitiesByDate, deleteActivity, submitting, target} 
+    const {deleteActivity, submitting, target} 
         = activityStore;
     return (
         <Item key={activity.id}>
