@@ -27,7 +27,6 @@ namespace Application.Activities
             public async Task<Activity> Handle(Query request,
             CancellationToken cancellationToken)
             {
-                throw new Exception("Testing server error");
                 var activity = await _context.Activities.FindAsync(request.Id);
                 
                 if (activity == null)
