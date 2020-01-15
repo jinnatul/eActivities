@@ -47,6 +47,10 @@ namespace API
             {
                 app.UseDeveloperExceptionPage();
             }
+            else 
+            {
+
+            }
 
             app.UseHttpsRedirection();
 
