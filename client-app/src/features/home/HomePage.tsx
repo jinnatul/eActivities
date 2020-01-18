@@ -8,7 +8,7 @@ const HomePage = () => {
             <Container text>
                 <Header as='h1' inverted>
                     <Image size='massive' src='/items/logo.png' alt='logo' style={{marginBottom: 12}}/>
-                    Reactivities
+                    eActivities
                 </Header>
                 <Header as='h2' inverted content='Welcome to eActivities' />
                 <Button as={Link} to='/activities' size='huge' inverted>
