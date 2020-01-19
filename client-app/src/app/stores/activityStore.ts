@@ -88,8 +88,8 @@ export class ActivityStore {
         try {
             await agent.Activities.create(activity);
             runInAction('create activity...', () => {
-                this.activityRegistry.set(activity.id, activity);
                 this.submitting = false;
+                this.activityRegistry.set(activity.id, activity);
             });
             history.push(`/activities/${activity.id}`)
         } catch (error) {
@@ -106,9 +106,9 @@ export class ActivityStore {
         try {
             await agent.Activities.update(activity);
             runInAction('editing activity...', () => {
-            this.activityRegistry.set(activity.id, activity);
             this.activity = activity;
             this.submitting = false;
+            this.activityRegistry.set(activity.id, activity);
             });
             history.push(`/activities/${activity.id}`)
         } catch (error) {

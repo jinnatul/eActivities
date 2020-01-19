@@ -12,6 +12,22 @@ import TextAreaInput from '../../../app/common/form/TextAreaInput';
 import SelectInput from '../../../app/common/form/SelectInput';
 import DateInput from '../../../app/common/form/DateInput';
 import { combineDateAndTime } from '../../../app/common/util/util';
+import { combineValidators, isRequired, hasLengthGreaterThan, composeValidators } from 'revalidate';
+
+const validate = combineValidators({
+    title: isRequired({message: 'The event Title is Required'}),
+    category: isRequired('Category'),
+    description: composeValidators(
+        isRequired('Description'),
+        hasLengthGreaterThan(4)({
+          message: 'Description needs to be at least 5 characters'
+        })
+    )(),
+    city: isRequired('City'),
+    venue: isRequired('Venue'),
+    date: isRequired('Date'),
+    time: isRequired('Time')
+})
 
 interface DetailsParams {
     id: string
@@ -26,9 +42,7 @@ const ActivityForm: React.FC<RouteComponentProps<DetailsParams>> = ({
         createActivity, 
         editActivity, 
         submitting, 
-        activity: initialeFormState,
-        loadActivity,
-        cleanActivity
+        loadActivity
     } = activityStore;
 
     const [activity, setActivity] = useState(new ActivityFormValues());
@@ -68,9 +82,10 @@ const ActivityForm: React.FC<RouteComponentProps<DetailsParams>> = ({
             <Grid.Column width={10}>
                 <Segment clearing>
                     <FinalForm 
+                        validate={validate}
                         initialValues={activity}
                         onSubmit={handleFinalFormSubmit}
-                        render = {({handleSubmit}) => (
+                        render = {({handleSubmit, invalid, pristine}) => (
                             <Form onSubmit={handleSubmit} loading={loading}>
                             <Field
                                 component={TextInput}
@@ -122,7 +137,7 @@ const ActivityForm: React.FC<RouteComponentProps<DetailsParams>> = ({
                             />
                             <Button 
                                 loading={submitting} 
-                                disabled={loading}
+                                disabled={loading || invalid || pristine}
                                 floated='right' positive 
                                 type='submit' 
                                 content='Submit' 
