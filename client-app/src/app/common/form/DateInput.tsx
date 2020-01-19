@@ -23,7 +23,6 @@ const DateInput: React.FC<IProps> = ({
                 onChange={input.onChange}
                 date={date}
                 time={time}
-                
             />
             {touched && error && (
                 <Label basic color='red'>
