@@ -11,6 +11,7 @@ import TextInput from '../../../app/common/form/TextInput';
 import TextAreaInput from '../../../app/common/form/TextAreaInput';
 import SelectInput from '../../../app/common/form/SelectInput';
 import DateInput from '../../../app/common/form/DateInput';
+import { combineDateAndTime } from '../../../app/common/util/util';
 
 interface DetailsParams {
     id: string
@@ -72,7 +73,10 @@ const ActivityForm: React.FC<RouteComponentProps<DetailsParams>> = ({
     // }
 
     const handleFinalFormSubmit = (values: any) => {
-        console.log(values);
+        const dateAndTime = combineDateAndTime(values.date, values.time);
+        const {date, time, ...activity} = values;
+        activity.date = dateAndTime;
+        console.log(activity);
     }
 
     return (
@@ -116,7 +120,7 @@ const ActivityForm: React.FC<RouteComponentProps<DetailsParams>> = ({
                                     name='time'
                                     time={true} 
                                     placeholder='Time' 
-                                    value={activity.date}
+                                    value={activity.time}
                                 />
                             </Form.Group>
                             <Field 
