@@ -38,7 +38,7 @@ namespace API
             //services.AddControllers();
             services.AddMvc()
             .AddFluentValidation(cfg => cfg.RegisterValidatorsFromAssemblyContaining<Create>())
-            .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            .SetCompatibilityVersion(CompatibilityVersion.Latest);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
