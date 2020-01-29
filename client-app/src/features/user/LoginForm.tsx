@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Form as FinalForm, Field} from 'react-final-form';
-import { Form, Button, Label, Header } from 'semantic-ui-react';
+import { Form, Button, Header } from 'semantic-ui-react';
 import TextInput from '../../app/common/form/TextInput';
 import { RootStoreContext } from '../../app/stores/rootStore';
 import { IUserFormValues } from '../../app/model/user';
