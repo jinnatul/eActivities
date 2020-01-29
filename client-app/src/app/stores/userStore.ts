@@ -28,6 +28,17 @@ export default class UserStore {
         }
     }
 
+    @action getUser = async () => {
+        try {
+            const user = await agent.User.current();
+            runInAction(() => {
+                this.user = user;
+            })
+        } catch (error) {
+            
+        }
+    }
+
     @action logout = () => {
         this.rootStore.commonStore.setToken(null);
         this.user = null;
