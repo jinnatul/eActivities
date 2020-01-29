@@ -9,22 +9,24 @@ import { combineValidators, isRequired } from 'revalidate';
 import ErrorMessage from '../../app/common/form/ErrorMessage';
 
 const validate = combineValidators({
-    email: isRequired('email'),
-    password: isRequired('password')
+    username: isRequired('User Name'),
+    displayName: isRequired('Display Name'),
+    email: isRequired('Email'),
+    password: isRequired('Password')
 })
 
-const LoginForm = () => {
+const RegisterForm = () => {
 
     const rootStore = useContext(RootStoreContext);
-    const { login } = rootStore.userStore;
+    const { register } = rootStore.userStore;
     return (
         <FinalForm 
             onSubmit={(values: IUserFormValues) => 
-                login(values).catch(error => ({
+                register(values).catch(error => ({
                 [FORM_ERROR]: error
             }))}
 
-            validate={validate}
+            //validate={validate}
             render = {({
                 handleSubmit, 
                 submitting, 
@@ -36,10 +38,12 @@ const LoginForm = () => {
                 <Form onSubmit={handleSubmit} error>
                     <Header
                         as='h2'
-                        content='LoGin to e-Activity'
+                        content='SignUp to e-Activity'
                         color='green'
                         textAlign='center'
                     />
+                    <Field name='username' component={TextInput} placeholder='User Name'/>
+                    <Field name='displayName' component={TextInput} placeholder='Display Name'/>
                     <Field name='email' component={TextInput} placeholder='Ex: morol@gmail.com'/>
                     <Field 
                         name='password' 
@@ -50,14 +54,14 @@ const LoginForm = () => {
                     {submitError && !dirtySinceLastSubmit && (
                         <ErrorMessage
                             error={submitError}
-                            text='Invalid Email or Password'
+                            text={JSON.stringify(submitError.data.errors)}
                         />
                     )}
                     <Button 
                         disabled={(invalid && !dirtySinceLastSubmit) || pristine} 
                         loading={submitting} 
                         color='blue' 
-                        content='L0gIn'
+                        content='ReGister'
                         fluid
                     />
                 </Form>
@@ -66,4 +70,4 @@ const LoginForm = () => {
     )
 }
 
-export default LoginForm
+export default RegisterForm
