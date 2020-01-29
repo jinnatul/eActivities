@@ -1,5 +1,5 @@
 import { observable, action, computed, configure, runInAction } from 'mobx'
-import { createContext, SyntheticEvent } from "react"
+import {  SyntheticEvent } from "react"
 import { IActivity } from '../model/activity'
 import agent from '../api/agent';
 import { history } from '../..';

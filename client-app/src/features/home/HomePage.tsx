@@ -11,8 +11,8 @@ const HomePage = () => {
                     eActivities
                 </Header>
                 <Header as='h2' inverted content='Welcome to eActivities' />
-                <Button as={Link} to='/activities' size='huge' inverted>
-                    Go to the activities!
+                <Button as={Link} to='/login' size='huge' inverted>
+                    L0gIn
                 </Button>
             </Container>
         </Segment>
