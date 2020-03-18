@@ -2,6 +2,7 @@ using System.Text;
 using API.MiddleWare;
 using Application.Activities;
 using Application.Interfaces;
+using AutoMapper;
 using Domain;
 using FluentValidation.AspNetCore;
 using Infrastructure.Security;
@@ -44,7 +45,7 @@ namespace API
                 });
             });
             services.AddMediatR(typeof(List.Handler).Assembly);
-            //services.AddControllers();
+            services.AddAutoMapper(typeof(List.Handler));
             services.AddMvc(opt => {
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
                 opt.Filters.Add(new AuthorizeFilter(policy));
