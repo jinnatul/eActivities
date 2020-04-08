@@ -1,4 +1,4 @@
-import { IActivity } from "../../model/activity";
+import { IActivity, IAttendee } from "../../model/activity";
 import { IUser } from "../../model/user";
 
 export const combineDateAndTime = (date: Date, time: Date) => {
@@ -20,4 +20,13 @@ export const setActivityProps = (activity: IActivity, user: IUser) => {
         un.isHost
     );
     return activity;
+}
+
+export const createAttendee = (user: IUser): IAttendee => {
+    return {
+        displayName: user.displayName,
+        isHost: false,
+        userName: user.userName,
+        image: user.image!
+    }
 }
