@@ -19,6 +19,7 @@ export default class ActivityStore {
     @observable loadingInitial = false;
     @observable submitting = false;
     @observable target = '';
+    @observable loading = false;
 
     @computed get activitiesByDate() {
         return this.groupActivitiesByDate(Array.from(this.activityRegistry.values()));
@@ -146,22 +147,46 @@ export default class ActivityStore {
         }
     };
 
-    @action attendActivity = () => {
+    @action attendActivity = async () => {
         const attendee = createAttendee(this.rootStore.userStore.user!);
-        if (this.activity) {
-            this.activity.userActivities.push(attendee);
-            this.activity.isGoing = true;
-            this.activityRegistry.set(this.activity.id, this.activity);
+        this.loading = true;
+        try {
+            await agent.Activities.attend(this.activity!.id);
+            runInAction(() => {
+                if (this.activity) {
+                    this.activity.userActivities.push(attendee);
+                    this.activity.isGoing = true;
+                    this.activityRegistry.set(this.activity.id, this.activity);
+                    this.loading = false;
+                }
+            })
+        } catch (error) {
+            runInAction(() => {
+                this.loading = false;
+            })
+            toast.error('Problem for Joining Activity...!!!');
         }
     }
 
-    @action cancelActivity = () => {
-        if (this.activity) {
-            this.activity.userActivities = this.activity.userActivities.filter(
-                un => un.userName !== this.rootStore.userStore.user!.userName
-            );
-            this.activity.isGoing = false;
-            this.activityRegistry.set(this.activity.id, this.activity);
+    @action cancelActivity = async () => {
+        this.loading = true;
+        try {
+            await agent.Activities.unattend(this.activity!.id);
+            runInAction(() => {
+                if (this.activity) {
+                    this.activity.userActivities = this.activity.userActivities.filter(
+                        un => un.userName !== this.rootStore.userStore.user!.userName
+                    );
+                    this.activity.isGoing = false;
+                    this.activityRegistry.set(this.activity.id, this.activity);
+                    this.loading = false;
+                }
+            })
+        } catch (error) {
+            runInAction(() => {
+                this.loading = false;
+            })
+            toast.error('Problem for Cancelling Activity...!!!');
         }
     }
 }
