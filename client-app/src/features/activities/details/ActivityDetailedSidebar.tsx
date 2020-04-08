@@ -9,7 +9,6 @@ interface IProps {
 }
 
 const ActivityDetailedSidebar: React.FC<IProps> = ({attendees}) => {
-    const isHost = false;
     return (
         <Fragment>
             <Segment
@@ -26,7 +25,7 @@ const ActivityDetailedSidebar: React.FC<IProps> = ({attendees}) => {
             <List relaxed divided>
                 {attendees.map((attende) => (
                     <Item key={attende.userName} style={{ position: 'relative' }}>
-                    {isHost && 
+                    {attende.isHost && 
                         <Label
                             style={{ position: 'absolute' }}
                             color='orange'
