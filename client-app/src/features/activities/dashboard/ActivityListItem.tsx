@@ -1,23 +1,37 @@
 import React from 'react'
-import { Item, Button, Segment, Icon } from 'semantic-ui-react';
+import { Item, Button, Segment, Icon, Label } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { IActivity } from '../../../app/model/activity';
 import {format} from 'date-fns';
 import ActivityListItemAttendees from './ActivityListItemAttendees';
 
 const ActivityListItem: React.FC<{activity: IActivity}> = ({activity}) => {
-
+    const host = activity.userActivities.filter(x => x.isHost)[0];
     return (
         <Segment.Group>
             <Segment>
                 <Item.Group>
                     <Item>
-                        <Item.Image size='tiny' circular src='/items/user.png' />
+                        <Item.Image size='tiny' circular src={host.image || '/items/user.png'}/>
                         <Item.Content>
-                            <Item.Header as='a'>{activity.title}</Item.Header>
+                            <Item.Header as={Link} to={`/activities/${activity.id}`}>{activity.title}</Item.Header>
+                            <Item.Description>Hosted by {host.displayName}</Item.Description>
+                            {activity.isHost && 
                             <Item.Description>
-                                Hosted by Morol
-                            </Item.Description>
+                                <Label 
+                                    basic 
+                                    color='orange' 
+                                    content='You are Hosting this Activity'
+                                />
+                            </Item.Description>}
+                            {activity.isGoing && !activity.isHost &&
+                            <Item.Description>
+                                <Label 
+                                    basic 
+                                    color='green' 
+                                    content='You are Going to this Activity'
+                                />
+                            </Item.Description>}
                         </Item.Content>
                     </Item>
                 </Item.Group>
