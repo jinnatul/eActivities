@@ -42,11 +42,20 @@ const ActivityDetailedHeader: React.FC<{activity: IActivity}> = ({activity}) => 
             </Segment>
             </Segment>
             <Segment clearing attached='bottom'>
-            <Button color='teal'>Join Activity</Button>
-            <Button>Cancel attendance</Button>
-            <Button as={Link} to={`/manage/${activity.id}`} color='orange' floated='right'>
-                Manage Event
-            </Button>
+                {activity.isHost ? (
+                    <Button 
+                        as={Link} 
+                        to={`/manage/${activity.id}`} 
+                        color='orange' 
+                        floated='right'
+                    >
+                        Manage Event
+                    </Button>
+                ) : activity.isGoing ? (
+                    <Button>Cancel attendance</Button>
+                ) : (
+                    <Button color='teal'>Join Activity</Button>
+                )}
             </Segment>
         </Segment.Group>
     )
