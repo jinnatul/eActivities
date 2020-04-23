@@ -1,11 +1,12 @@
 import React, { useContext, useState } from 'react'
 import { RootStoreContext } from '../../app/stores/rootStore';
 import { Tab, Header, Card, Image, Button, Grid } from 'semantic-ui-react';
+import PhotoUploadWidget from '../../app/common/photoUpload/PhotoUploadWidget';
 
 const ProfilePhotos = () => {
     const rootStore = useContext(RootStoreContext);
     const { profile, isCurrentUser } = rootStore.profileStore;
-    const [ addPhotoMode, setAddPhotoMode ] = useState(false);
+    const [ addPhotoMode, setAddPhotoMode ] = useState(true);
     return (
         <Tab.Pane>
             <Grid>
@@ -22,7 +23,7 @@ const ProfilePhotos = () => {
                 </Grid.Column>
                 <Grid.Column width={16}>
                     {addPhotoMode ? (
-                         <p>Photo goo</p>
+                         <PhotoUploadWidget/>
                     ) : (
                         <Card.Group itemsPerRow={4}>
                             {profile && profile.photos.map(photo => (
