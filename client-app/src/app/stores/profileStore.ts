@@ -17,7 +17,7 @@ export default class ProfileStore {
             return this.rootStore.userStore.user.userName === this.profile.userName
         }
         else {
-            return false;
+            return false
         }
     }
 
