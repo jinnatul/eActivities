@@ -25,7 +25,7 @@ const PhotoWidgetCopper: React.FC<IProps> = ({setImage, imagePreview}) => {
         <Cropper
             ref={cropper}
             src={imagePreview}
-            style={{height: 400, width: '100%'}}
+            style={{height: 250, width: '100%'}}
 
             //cropper.js
             aspectRatio={1/1}
