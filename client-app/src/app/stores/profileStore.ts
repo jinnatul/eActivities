@@ -11,7 +11,7 @@ export default class ProfileStore {
     }
 
     @observable profile: IProfile | null = null;
-    @observable loadingProfile = false;
+    @observable loadingProfile = true;
     @observable uploadingPhoto = false;
 
     @computed get isCurrentUser() {
@@ -22,7 +22,7 @@ export default class ProfileStore {
             return false
         }
     }
-
+    
     @action loadProfile = async (username: string) => {
         this.loadingProfile = true;
         try {
@@ -60,4 +60,5 @@ export default class ProfileStore {
                 this.uploadingPhoto = false;
             })
         }
+    }
 }
