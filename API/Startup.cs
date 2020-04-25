@@ -48,6 +48,7 @@ namespace API
             });
             services.AddMediatR(typeof(List.Handler).Assembly);
             services.AddAutoMapper(typeof(List.Handler));
+ 
             services.AddMvc(opt => {
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
                 opt.Filters.Add(new AuthorizeFilter(policy));
@@ -82,6 +83,7 @@ namespace API
             services.AddScoped<IUserAccessor, UserAccessor>();
             services.AddScoped<IPhotoAccessor, PhotoAccessor>();
             services.Configure<CloudinarySettings>(Configuration.GetSection("Cloudinary"));
+            services.AddControllers(options => options.EnableEndpointRouting = false);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -98,14 +100,14 @@ namespace API
 
             }
 
-            app.UseRouting();
+            //app.UseRouting();
             app.UseAuthentication();
             app.UseCors("CorsPolicy");
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseMvc();
+            // app.UseEndpoints(endpoints =>
+            // {
+            //     endpoints.MapControllers();
+            // });
         }
     }
 }

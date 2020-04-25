@@ -117,6 +117,7 @@ export default class ActivityStore {
     @action editActivity = async (activity: IActivity) => {
         this.submitting = true;
         try {
+            console.log(activity)
             await agent.Activities.update(activity);
             runInAction('editing activity...', () => {
             this.activity = activity;
