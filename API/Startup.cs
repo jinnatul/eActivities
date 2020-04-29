@@ -1,5 +1,7 @@
 using System.Text;
+using System.Threading.Tasks;
 using API.MiddleWare;
+using API.SignalR;
 using Application.Activities;
 using Application.Interfaces;
 using AutoMapper;
@@ -43,11 +45,12 @@ namespace API
             services.AddCors(opt => {
                 opt.AddPolicy("CorsPolicy", policy => {
                     policy.AllowAnyHeader().AllowAnyMethod().WithOrigins(
-                        "http://localhost:3000");
+                        "http://localhost:3000").AllowCredentials();
                 });
             });
             services.AddMediatR(typeof(List.Handler).Assembly);
             services.AddAutoMapper(typeof(List.Handler));
+            services.AddSignalR();
             services.AddMvc(opt => {
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
                 opt.Filters.Add(new AuthorizeFilter(policy));
@@ -76,12 +79,27 @@ namespace API
                         ValidateAudience = false,
                         ValidateIssuer = false
                     };
+                    opt.Events = new JwtBearerEvents
+                    {
+                        OnMessageReceived = context =>
+                        {
+                            var accessToken = context.Request.Query["access_token"];
+                            var path = context.HttpContext.Request.Path;
+                            if (!string.IsNullOrEmpty(accessToken)
+                                && (path.StartsWithSegments("/chat")))
+                            {
+                                context.Token = accessToken;
+                            }
+                            return Task.CompletedTask;
+                        }
+                    };
                 });
 
             services.AddScoped<IJwtGenerator, JwtGenerator>();
             services.AddScoped<IUserAccessor, UserAccessor>();
             services.AddScoped<IPhotoAccessor, PhotoAccessor>();
             services.Configure<CloudinarySettings>(Configuration.GetSection("Cloudinary"));
+            services.AddControllers(options => options.EnableEndpointRouting = false);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -98,14 +116,13 @@ namespace API
 
             }
 
-            app.UseRouting();
             app.UseAuthentication();
             app.UseCors("CorsPolicy");
-
-            app.UseEndpoints(endpoints =>
+            app.UseSignalR(routes =>
             {
-                endpoints.MapControllers();
+                routes.MapHub<ChatHub>("/chat");
             });
+            app.UseMvc();
         }
     }
 }

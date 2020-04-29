@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Application.Profiles;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -10,6 +11,12 @@ namespace API.Controllers
         public async Task<ActionResult<Profile>> Get(string userName)
         {
             return await Mediator.Send(new Details.Query {UserName = userName});
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<Unit>> Edit(Edit.Command command)
+        {
+            return await Mediator.Send(command);
         }
     }
 }
