@@ -1,4 +1,4 @@
-import { observable, action, computed, runInAction } from 'mobx'
+import { observable, action, computed, runInAction, values } from 'mobx'
 import {  SyntheticEvent } from "react"
 import { IActivity } from '../model/activity'
 import agent from '../api/agent';
@@ -44,6 +44,15 @@ export default class ActivityStore {
 
     @action stopHubConnection = () => {
         this.hubConnection!.stop();
+    }
+
+    @action addComment = async (values: any) => {
+        values.activityId = this.activity!.id;
+        try {
+            await this.hubConnection!.invoke('SendComment', values)
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     @computed get activitiesByDate() {
