@@ -48,7 +48,7 @@ namespace API
             });
             services.AddMediatR(typeof(List.Handler).Assembly);
             services.AddAutoMapper(typeof(List.Handler));
- 
+            services.AddSignalR();
             services.AddMvc(opt => {
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
                 opt.Filters.Add(new AuthorizeFilter(policy));
@@ -100,14 +100,13 @@ namespace API
 
             }
 
-            //app.UseRouting();
             app.UseAuthentication();
             app.UseCors("CorsPolicy");
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<ChatHub>("/chat");
+            });
             app.UseMvc();
-            // app.UseEndpoints(endpoints =>
-            // {
-            //     endpoints.MapControllers();
-            // });
         }
     }
 }
