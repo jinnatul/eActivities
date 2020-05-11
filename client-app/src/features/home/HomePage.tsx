@@ -6,6 +6,7 @@ import LoginForm from '../user/LoginForm';
 import RegisterForm from '../user/RegisterForm';
 
 const HomePage = () => {
+    const token = window.localStorage.getItem('jwt');
     const rootStore = useContext(RootStoreContext);
     const { isLoggedIn, user} = rootStore.userStore;
     const { openModal } = rootStore.modalStore;
@@ -17,7 +18,7 @@ const HomePage = () => {
                     <Image size='massive' src='/items/logo.png' alt='logo' style={{marginBottom: 12, borderRadius: 100}}/>
                     eActivities
                 </Header>
-                {isLoggedIn && user ? (
+                {isLoggedIn && user && token ? (
                     <Fragment>
                         <Header as='h2' inverted content={`Welcome back ${user.displayName}`} />
                         <Button as={Link} to='/activities' size='huge' inverted>

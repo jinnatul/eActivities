@@ -16,11 +16,16 @@ axios.interceptors.request.use((config) => {
 })
 
 axios.interceptors.response.use(undefined, error => {
-    
     if(error.message === 'Network Error' && !error.response) {
         toast.error("Network error - make sure API is running!");
     }
-    const {status, data, config} = error.response;
+    const {status, data, config, headers} = error.response;
+    let tokenInfo = headers["www-authenticate"];
+    if (status === 401 && tokenInfo.includes("invalid_token")) {
+        window.localStorage.removeItem('jwt');
+        history.push('/');
+        toast.error("Your session has expired, please login again");
+    }
     if(status === 404) {
         history.push('/notfound');
     }
