@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using System.Threading.Tasks;
 using API.MiddleWare;
@@ -45,8 +46,12 @@ namespace API
             });
             services.AddCors(opt => {
                 opt.AddPolicy("CorsPolicy", policy => {
-                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins(
-                        "http://localhost:3000").AllowCredentials();
+                    policy
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .WithExposedHeaders("WWW-Authenticate")
+                        .WithOrigins("http://localhost:3000")
+                        .AllowCredentials();
                 });
             });
             services.AddMediatR(typeof(List.Handler).Assembly);
@@ -78,7 +83,9 @@ namespace API
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = key, 
                         ValidateAudience = false,
-                        ValidateIssuer = false
+                        ValidateIssuer = false,
+                        ValidateLifetime = true,
+                        ClockSkew = TimeSpan.Zero
                     };
                     opt.Events = new JwtBearerEvents
                     {
@@ -118,13 +125,21 @@ namespace API
 
             }
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseAuthentication();
             app.UseCors("CorsPolicy");
             app.UseSignalR(routes =>
             {
                 routes.MapHub<ChatHub>("/chat");
             });
-            app.UseMvc();
+            app.UseMvc(routes => 
+            {
+                routes.MapRoute(
+                    name: "spa-fallback",
+                    template: "{controller=Fallback}/{action=Index}"
+                );
+            });
         }
     }
 }
